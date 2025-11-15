@@ -1,11 +1,81 @@
+@charset "UTF-8";
+
+$bios-blue: #0000AA;
+$bios-text: #FFFFFF;
+$bios-bright: #FFFFFF;
+$bios-yellow: #FFFF55;
+$bios-black: #000000;
+$bios-red: #AA0000;
+
+// Bootstrap variable overrides
+$body-bg: $bios-blue;
+$body-color: $bios-text;
+
+$primary: $bios-bright;
+$secondary: $bios-bright;
+$dark: $bios-black;
+$light: $bios-text;
+
+$link-color: $bios-yellow;
+$link-hover-color: $bios-bright;
+
+$border-color: $bios-black;
+$dropdown-bg: $bios-blue;
+$dropdown-color: $bios-text;
+
+$font-family-base: "IBM DOS VGA 9x16";
+
 @import "bootstrap/scss/bootstrap";
 
-@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
-@source '../../storage/framework/views/*.php';
-@source '../**/*.blade.php';
-@source '../**/*.js';
+.bios-box {
+    padding: 4px;
+    border: 1px solid $bios-bright;
+    background: $bios-blue;
+    color: $bios-text;
 
-@theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+    h1, h2, h3, h4 {
+        margin-bottom: .5rem;
+    }
+}
+
+.bios-box-wrapper {
+    .bios-box {
+        width: 100%;
+
+        @include media-breakpoint-up(lg) {
+            width: 50%;
+        }
+    }
+}
+
+.bios-link {
+    padding: 0;
+    border: 0;
+    background: 0;
+    color: $bios-yellow;
+    text-decoration: none;
+    position: relative;
+
+    &:hover,
+    &:focus {
+        color: $bios-bright;
+        background: $bios-red;
+        outline: none;
+        -webkit-box-shadow: 4px 2px 0 0 #000000;
+        box-shadow: 4px 2px 0 0 #000000;
+    }
+
+    &::before {
+        content: "► ";
+        position: relative;
+    }
+
+    &:hover::before {
+        color: $bios-bright;
+    }
+}
+
+:focus {
+    outline: 2px dotted $bios-yellow;
+    outline-offset: 2px;
 }
