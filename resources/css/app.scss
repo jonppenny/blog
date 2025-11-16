@@ -23,7 +23,8 @@ $border-color: $bios-black;
 $dropdown-bg: $bios-blue;
 $dropdown-color: $bios-text;
 
-$font-family-base: "IBM DOS VGA 9x16";
+//$font-family-base: "IBM DOS VGA 9x16";
+$font-family-base: "IBM Plex Mono", monospace;
 
 @import "bootstrap/scss/bootstrap";
 
@@ -56,6 +57,7 @@ $font-family-base: "IBM DOS VGA 9x16";
     text-decoration: none;
     position: relative;
 
+    &.active,
     &:hover,
     &:focus {
         color: $bios-bright;
@@ -68,6 +70,7 @@ $font-family-base: "IBM DOS VGA 9x16";
     &::before {
         content: "► ";
         position: relative;
+        top: -2px;
     }
 
     &:hover::before {
