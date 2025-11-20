@@ -11,6 +11,6 @@ class AdminController extends Controller
     {
         $posts = Post::latest()->paginate(10)->withQueryString();
 
-        return view('admin/home', ['posts' => $posts]);
+        return view('admin/index', ['posts' => $posts]);
     }
 }

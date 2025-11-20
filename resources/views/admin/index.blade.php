@@ -1,4 +1,4 @@
-<x-layout>
+<x-admin>
     <x-slot:title>
         Admin
     </x-slot:title>
@@ -23,4 +23,4 @@
             </tbody>
         </table>
     </div>
-</x-layout>
+</x-admin>
