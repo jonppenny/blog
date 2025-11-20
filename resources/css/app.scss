@@ -44,7 +44,11 @@ $font-family-base: "IBM Plex Mono", monospace;
         width: 100%;
 
         @include media-breakpoint-up(lg) {
-            width: 50%;
+            width: 25%;
+
+            &:first-child {
+                width: 75%;
+            }
         }
     }
 }
