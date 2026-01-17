@@ -13,7 +13,11 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        $posts = Post::latest()
+            ->paginate(10)
+            ->withQueryString();
+
+        return view('admin/posts', ['posts' => $posts]);
     }
 
     /**
@@ -21,7 +25,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.post-new');
     }
 
     /**
@@ -29,7 +33,14 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'body'  => 'required|string',
+        ]);
+
+        Post::create($validated);
+
+        return redirect("admin/posts");
     }
 
     /**
@@ -45,7 +56,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        return view('admin/post', ['post' => $post]);
     }
 
     /**
@@ -53,7 +64,14 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'body'  => 'required|string',
+        ]);
+
+        $post->update($validated);
+
+        return redirect('admin/posts');
     }
 
     /**
@@ -61,6 +79,12 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        $post->delete();
+
+        $posts = Post::latest()
+            ->paginate(10)
+            ->withQueryString();
+
+        return view('admin/posts', ['posts' => $posts]);
     }
 }

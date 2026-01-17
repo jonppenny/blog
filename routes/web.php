@@ -1,11 +1,13 @@
 <?php
 
+use App\Http\Controllers\Admin\AccountController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Auth\Login;
 use App\Http\Controllers\Auth\Logout;
 use App\Http\Controllers\Front\IndexController;
+use App\Http\Controllers\Front\MenuController;
 use Illuminate\Support\Facades\Route;
 
 //use App\Http\Controllers\Auth\Register;
@@ -22,19 +24,26 @@ Route::get('/post/{id}', [IndexController::class, 'showPost']);
 
 // Admin
 Route::middleware('auth')->group(function () {
-    Route::get('/admin', [AdminController::class, 'index']);
+    Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
 
-    Route::get('/admin/posts', [PostController::class, 'index']);
-    Route::post('/admin/posts', [PostController::class, 'store']);
-    Route::get('/admin/{post}/edit', [PostController::class, 'edit']);
-    Route::put('/admin/{post}', [PostController::class, 'update']);
-    Route::delete('/admin/{post}', [PostController::class, 'destroy']);
+    Route::get('/admin/posts', [PostController::class, 'index'])->name('admin.posts.index');
+    Route::get('/admin/post', [PostController::class, 'create'])->name('admin.post.create');
+    Route::post('/admin/post', [PostController::class, 'store'])->name('admin.post.store');
+    Route::get('/admin/{post}/edit', [PostController::class, 'edit'])->name('admin.post.edit');
+    Route::put('/admin/{post}', [PostController::class, 'update'])->name('admin.post.update');
+    Route::delete('/admin/{post}/destroy', [PostController::class, 'destroy'])->name('admin.post.destroy');
 
-    Route::get('/admin/pages', [PageController::class, 'index']);
-    Route::post('/admin/pages', [PageController::class, 'store']);
-    Route::get('/admin/{page}/edit', [PageController::class, 'edit']);
-    Route::put('/admin/{page}', [PageController::class, 'update']);
-    Route::delete('/admin/{page}', [PageController::class, 'destroy']);
+    Route::get('/admin/pages', [PageController::class, 'index'])->name('admin.pages.index');
+    Route::get('/admin/page', [PageController::class, 'create'])->name('admin.page.create');
+    Route::post('/admin/page', [PageController::class, 'store'])->name('admin.page.store');
+    Route::get('/admin/{page}/edit', [PageController::class, 'edit'])->name('admin.page.edit');
+    Route::put('/admin/{page}', [PageController::class, 'update'])->name('admin.page.update');
+    Route::delete('/admin/{page}', [PageController::class, 'destroy'])->name('admin.page.destroy');
+
+    Route::get('/admin/menus', [MenuController::class, 'index'])->name('admin.menus');
+
+    Route::get('/admin/account', [AccountController::class, 'index'])->name('admin.account');
+    Route::put('/admin/account', [AccountController::class, 'update'])->name('admin.account.update');
 });
 
 // Auth

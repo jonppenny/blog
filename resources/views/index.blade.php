@@ -18,11 +18,10 @@
             @endforelse
 
             {{-- Pagination --}}
-            {{--@if ($posts instanceof \Illuminate\Pagination\LengthAwarePaginator)
-                <div class="">
-                    {{ $posts->links() }}
-                </div>
-            @endif--}}
+            @if ($posts instanceof \Illuminate\Pagination\LengthAwarePaginator)
+                {{ $posts->links('pagination') }}
+            @endif
+
         </div>
         <div class="p-5 bios-box">
             @include('components.side-panel')

@@ -8,7 +8,7 @@
         <div class="p-5 bios-box">
             <h1>{{$post->title}}</h1>
             <div class="mb-2">{{ $post->created_at->format('d-m-Y') }}</div>
-            <div>{{$post->body}}</div>
+            <div>{!! $post->body !!}</div>
         </div>
         <div class="p-5 bios-box">
             @include('components.side-panel')

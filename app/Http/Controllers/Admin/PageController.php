@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Page;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,11 @@ class PageController extends Controller
      */
     public function index()
     {
-        //
+        $pages = Page::latest()
+            ->paginate(10)
+            ->withQueryString();
+
+        return view('admin/pages', ['pages' => $pages]);
     }
 
     /**
@@ -44,7 +49,7 @@ class PageController extends Controller
      */
     public function edit(Page $page)
     {
-        //
+        return view('admin/page', ['page' => $page]);
     }
 
     /**
@@ -52,7 +57,14 @@ class PageController extends Controller
      */
     public function update(Request $request, Page $page)
     {
-        //
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'body'  => 'required|string',
+        ]);
+
+        $page->update($validated);
+
+        return redirect("admin/{$page}/page")->with('success', 'Page updated!');
     }
 
     /**

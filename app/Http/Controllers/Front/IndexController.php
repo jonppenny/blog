@@ -9,7 +9,7 @@ class IndexController extends Controller
 {
     public function index()
     {
-        $posts = Post::latest()->paginate(10)->withQueryString();
+        $posts = Post::latest()->paginate(12)->withQueryString();
 
         return view('index', ['posts' => $posts]);
     }
