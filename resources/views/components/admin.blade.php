@@ -23,7 +23,6 @@
             <li class="nav-item"><a href="{{route('admin.index')}}" class="nav-link" aria-current="page">Home</a></li>
             <li class="nav-item"><a href="{{route('admin.posts.index')}}" class="nav-link">Posts</a></li>
             <li class="nav-item"><a href="{{route('admin.pages.index')}}" class="nav-link">Pages</a></li>
-            <li class="nav-item"><a href="{{route('admin.menus')}}" class="nav-link">Menus</a></li>
             <li class="nav-item"><a href="{{route('admin.account')}}" class="nav-link">Account</a></li>
         </ul>
         <form action="{{route('logout')}}" method="post">

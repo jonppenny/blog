@@ -22,13 +22,13 @@
                 <tr>
                     <td>{{$page->id}}</td>
                     <td>{{$page->title}}</td>
-                    <td>
+                    <td class="d-flex align-items-center justify-content-end gap-2">
                         <a href="{{route('admin.page.edit', ['page' => $page])}}" class="btn btn-secondary">Edit</a>
-                        <form action="/admin/{{$page->id}}/destroy" method="POST">
+                        <form action="/admin/{{$page->slug}}/destroy" method="POST">
                             @csrf
                             @method('DELETE')
 
-                            <button class="btn btn-link-danger">DELETE</button>
+                            <button class="btn btn-outline-danger">DELETE</button>
                         </form>
                     </td>
                 </tr>

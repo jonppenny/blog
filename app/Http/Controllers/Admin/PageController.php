@@ -25,7 +25,7 @@ class PageController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.page-new');
     }
 
     /**
@@ -33,7 +33,15 @@ class PageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'slug'  => 'required|string|max:255|unique:pages,slug',
+            'body'  => 'required|string',
+        ]);
+
+        Page::create($validated);
+
+        return redirect("admin/pages");
     }
 
     /**
@@ -59,12 +67,13 @@ class PageController extends Controller
     {
         $validated = $request->validate([
             'title' => 'required|string|max:255',
+            'slug'  => 'required|string|max:255|unique:pages,slug',
             'body'  => 'required|string',
         ]);
 
         $page->update($validated);
 
-        return redirect("admin/{$page}/page")->with('success', 'Page updated!');
+        return redirect('admin/pages');
     }
 
     /**
@@ -72,6 +81,12 @@ class PageController extends Controller
      */
     public function destroy(Page $page)
     {
-        //
+        $page->delete();
+
+        $pages = Page::latest()
+            ->paginate(10)
+            ->withQueryString();
+
+        return view('admin/pages', ['posts' => $pages]);
     }
 }

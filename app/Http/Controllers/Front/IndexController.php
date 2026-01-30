@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
+use App\Models\Page;
 use App\Models\Post;
 
 class IndexController extends Controller
@@ -21,7 +22,10 @@ class IndexController extends Controller
         return view('post', ['post' => $post]);
     }
 
-    public function showPage()
+    public function showPage(string $slug)
     {
+        $page = Page::where('slug', $slug)->firstOrFail();
+
+        return view('page', ['page' => $page]);
     }
 }

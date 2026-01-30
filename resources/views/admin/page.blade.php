@@ -3,13 +3,23 @@
         {{$page->title}}
     </x-slot:title>
     <div>
-        <form action="/admin/{{$page}}" method="post">
+        <form action="{{route('admin.page.update', ['page' => $page])}}" method="post">
             @csrf
             @method('PUT')
 
             <div class="mb-3">
                 <label for="title" class="form-label">Page title</label>
                 <input type="text" name="title" value="{{$page->title}}" id="title" class="form-control" required/>
+            </div>
+
+            <div class="mb-3">
+                <label for="slug" class="form-label">Page slug</label>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon3">/</span>
+                    </div>
+                    <input type="text" name="slug" value="{{$page->slug}}" id="slug" class="form-control" required/>
+                </div>
             </div>
 
             <div class="mb-3 ck-dark">

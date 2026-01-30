@@ -1,20 +1,29 @@
 <x-admin>
     <x-slot:title>
-        {{$post->title}}
+        Create
     </x-slot:title>
     <div>
-        <form action="{{route('admin.post.update', ['post' => $post])}}" method="post">
+        <form action="{{route('admin.page.store')}}" method="post">
             @csrf
-            @method('PUT')
 
             <div class="mb-3">
-                <label for="title" class="form-label">Post title</label>
-                <input type="text" name="title" value="{{$post->title}}" id="title" class="form-control" required/>
+                <label for="title" class="form-label">Page title</label>
+                <input type="text" name="title" value="" id="title" class="form-control" required/>
+            </div>
+
+            <div class="mb-3">
+                <label for="slug" class="form-label">Page slug</label>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon3">/</span>
+                    </div>
+                    <input type="text" name="slug" value="" id="slug" class="form-control" required/>
+                </div>
             </div>
 
             <div class="mb-3 ck-dark">
-                <label for="body" class="form-label">Post body</label>
-                <textarea name="body" id="body" class="form-control" required>{{$post->body}}</textarea>
+                <label for="body" class="form-label">Page body</label>
+                <textarea name="body" id="body" class="form-control"></textarea>
             </div>
 
             <button type="submit" class="btn btn-primary">Submit</button>
