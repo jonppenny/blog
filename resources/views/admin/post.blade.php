@@ -3,18 +3,34 @@
         {{$post->title}}
     </x-slot:title>
     <div>
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul class="mb-0">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         <form action="{{route('admin.post.update', ['post' => $post])}}" method="post">
             @csrf
             @method('PUT')
 
             <div class="mb-3">
                 <label for="title" class="form-label">Post title</label>
-                <input type="text" name="title" value="{{$post->title}}" id="title" class="form-control" required/>
+                <input type="text" name="title" value="{{old('title', $post->title)}}" id="title" class="form-control @error('title') is-invalid @enderror" required/>
+                @error('title')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
             </div>
 
             <div class="mb-3 ck-dark">
                 <label for="body" class="form-label">Post body</label>
-                <textarea name="body" id="body" class="form-control" required>{{$post->body}}</textarea>
+                <textarea name="body" id="body" class="form-control @error('body') is-invalid @enderror" required>{{old('body', $post->body)}}</textarea>
+                @error('body')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
             </div>
 
             <button type="submit" class="btn btn-primary">Submit</button>

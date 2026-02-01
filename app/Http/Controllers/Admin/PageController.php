@@ -67,7 +67,7 @@ class PageController extends Controller
     {
         $validated = $request->validate([
             'title' => 'required|string|max:255',
-            'slug'  => 'required|string|max:255|unique:pages,slug',
+            'slug'  => 'required|string|max:255|unique:pages,slug,' . $page->id,
             'body'  => 'required|string',
         ]);
 
