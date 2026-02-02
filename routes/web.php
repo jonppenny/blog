@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AccountController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\Admin\CkeditorController;
 use App\Http\Controllers\Auth\Login;
 use App\Http\Controllers\Auth\Logout;
 use App\Http\Controllers\Auth\Register;
@@ -49,6 +50,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/admin/account', [AccountController::class, 'index'])->name('admin.account');
     Route::put('/admin/account', [AccountController::class, 'update'])->name('admin.account.update');
+
+    Route::post('/ckeditor/upload', [CkeditorController::class, 'upload'])->name('ckeditor.upload');
 });
 
 // Auth
